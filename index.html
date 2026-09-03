@@ -257,7 +257,9 @@
     color:var(--slate-400);
     font-size:.82rem;
   }
-  footer strong{ color:var(--slate-600); font-weight:500; }
+  footer strong{ font-weight:500; }
+  footer a{ color:var(--slate-600); text-decoration:none; transition:color .2s ease; }
+  footer a:hover{ color:var(--teal-600); }
 
   @media (max-width: 480px){
     form{ flex-direction:column; align-items:stretch; }
@@ -318,7 +320,7 @@
 </main>
 
 <footer>
-  © 2026 MediUnify. <strong>Powered by Novus Health Labs.</strong>
+  © 2026 MediUnify. <strong>Powered by <a href="https://www.novushealth.in/" target="_blank" rel="noopener noreferrer">Novus Health Labs</a>.</strong>
 </footer>
 
 <script>
