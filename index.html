@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediUnify — Coming Soon</title>
+<meta name="description" content="MediUnify by Novus Health Labs — all your healthcare, one intelligent platform. Launching soon.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-000:#ffffff;
+    --bg-050:#f4fbfa;
+    --bg-100:#eaf6f4;
+    --teal-50:#e3f8f4;
+    --teal-300:#5eead4;
+    --teal-400:#2dd4bf;
+    --teal-500:#14b8a6;
+    --teal-600:#0d9488;
+    --teal-glow:rgba(20,184,166,.28);
+    --navy-900:#0a1440;
+    --navy-700:#1e2a5e;
+    --slate-600:#475569;
+    --slate-500:#64748b;
+    --slate-400:#94a3b8;
+    --line:rgba(15,23,42,.09);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%; overflow-x:hidden;}
+
+  body{
+    background:
+      radial-gradient(1100px 620px at 15% -10%, rgba(20,184,166,.10), transparent 60%),
+      radial-gradient(900px 700px at 90% 105%, rgba(30,42,94,.08), transparent 60%),
+      linear-gradient(180deg, var(--bg-000), var(--bg-050));
+    color:var(--navy-900);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+    min-height:100dvh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(circle at 50% 30%, black, transparent 70%);
+    opacity:.5;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .blob{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.22;
+    pointer-events:none;
+    z-index:0;
+  }
+  .blob-a{
+    width:480px;height:480px;
+    background:var(--teal-400);
+    top:-160px; left:-140px;
+    animation:driftA 22s ease-in-out infinite alternate;
+  }
+  .blob-b{
+    width:520px;height:520px;
+    background:var(--navy-700);
+    bottom:-200px; right:-160px;
+    animation:driftB 26s ease-in-out infinite alternate;
+  }
+  @keyframes driftA{
+    0%{ transform:translate(0,0) scale(1); }
+    100%{ transform:translate(60px,40px) scale(1.08); }
+  }
+  @keyframes driftB{
+    0%{ transform:translate(0,0) scale(1); }
+    100%{ transform:translate(-50px,-30px) scale(1.05); }
+  }
+
+  main{
+    position:relative;
+    z-index:1;
+    min-height:100vh;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:64px 24px 40px;
+    text-align:center;
+  }
+
+  .lockup{
+    width:min(260px, 52vw);
+    filter:drop-shadow(0 8px 26px rgba(10,20,64,.10)) drop-shadow(0 0 24px var(--teal-glow));
+    animation:breathe 4.5s ease-in-out infinite;
+  }
+  .lockup img{ width:100%; display:block; }
+
+  @keyframes breathe{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.015); }
+  }
+
+  .ecg{
+    width:min(560px, 88vw);
+    height:64px;
+    margin:20px auto 26px;
+  }
+  .ecg path{
+    fill:none;
+    stroke:url(#ecgGradient);
+    stroke-width:2.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw 3.2s cubic-bezier(.4,0,.2,1) infinite;
+  }
+  @keyframes draw{
+    0%{ stroke-dashoffset:900; opacity:.35; }
+    8%{ opacity:1; }
+    55%{ stroke-dashoffset:0; opacity:1; }
+    75%{ stroke-dashoffset:0; opacity:.9; }
+    100%{ stroke-dashoffset:-900; opacity:.35; }
+  }
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 16px;
+    border:1px solid rgba(20,184,166,.25);
+    border-radius:100px;
+    background:var(--teal-50);
+    color:var(--teal-600);
+    font-size:.82rem;
+    font-weight:600;
+    letter-spacing:.02em;
+    margin-bottom:18px;
+  }
+
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:clamp(1.9rem, 4.2vw, 2.9rem);
+    line-height:1.15;
+    letter-spacing:-.01em;
+    max-width:15ch;
+    color:var(--navy-900);
+  }
+
+  p.sub{
+    margin-top:16px;
+    max-width:46ch;
+    color:var(--slate-600);
+    font-size:1.02rem;
+    line-height:1.6;
+  }
+
+  .status{
+    margin-top:34px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    background:var(--bg-000);
+    box-shadow:0 2px 10px rgba(10,20,64,.05);
+    font-size:.88rem;
+    color:var(--slate-600);
+    min-height:38px;
+  }
+  .status .dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--teal-500);
+    box-shadow:0 0 0 0 rgba(20,184,166,.5);
+    animation:pulse-dot 1.6s ease-out infinite;
+    flex-shrink:0;
+  }
+  @keyframes pulse-dot{
+    0%{ box-shadow:0 0 0 0 rgba(20,184,166,.45); }
+    70%{ box-shadow:0 0 0 8px rgba(20,184,166,0); }
+    100%{ box-shadow:0 0 0 0 rgba(20,184,166,0); }
+  }
+
+  form{
+    margin-top:36px;
+    display:flex;
+    gap:10px;
+    width:min(420px, 100%);
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  input[type="email"]{
+    flex:1 1 220px;
+    min-width:0;
+    background:var(--bg-000);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:13px 16px;
+    color:var(--navy-900);
+    font-family:'Inter', sans-serif;
+    font-size:16px; /* 16px is required on iOS to prevent auto-zoom on focus */
+    outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  input[type="email"]::placeholder{ color:var(--slate-400); }
+  input[type="email"]:focus{
+    border-color:var(--teal-400);
+    box-shadow:0 0 0 3px rgba(20,184,166,.12);
+  }
+
+  button{
+    flex:0 0 auto;
+    background:linear-gradient(135deg, var(--teal-500), var(--teal-600));
+    color:#ffffff;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+    border:none;
+    border-radius:10px;
+    padding:13px 22px;
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  }
+  button:hover{ box-shadow:0 10px 24px rgba(13,148,136,.28); transform:translateY(-1px); }
+  button:disabled{ opacity:.7; cursor:default; transform:none; box-shadow:none; }
+
+  .note{
+    margin-top:12px;
+    font-size:.8rem;
+    color:var(--slate-500);
+    min-height:1.2em;
+  }
+  .note.success{ color:var(--teal-600); font-weight:500; }
+
+  footer{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    padding:22px 24px 30px;
+    color:var(--slate-400);
+    font-size:.82rem;
+  }
+  footer strong{ color:var(--slate-600); font-weight:500; }
+
+  @media (max-width: 480px){
+    form{ flex-direction:column; align-items:stretch; }
+    input[type="email"], button{ flex:none; width:100%; }
+    .ecg { margin: 10px auto 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .blob-a, .blob-b, .lockup, .ecg path, .status .dot{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-a"></div>
+<div class="blob blob-b"></div>
+
+<main>
+  <div class="lockup">
+    <img src="logo.png" alt="MediUnify — powered by Novus Health Labs">
+  </div>
+
+  <svg class="ecg" viewBox="0 0 560 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="ecgGradient" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#14b8a6" stop-opacity="0"/>
+        <stop offset="15%" stop-color="#14b8a6"/>
+        <stop offset="50%" stop-color="#2dd4bf"/>
+        <stop offset="85%" stop-color="#14b8a6"/>
+        <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,32 L120,32 L145,32 L158,10 L172,54 L186,20 L200,32 L230,32 L560,32"/>
+  </svg>
+
+  <div class="badge">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+    </svg>
+    Launching Soon
+  </div>
+  <h1>We're building something healthier.</h1>
+  <p class="sub">Doctors, labs, pharmacy, records and care — coming together on one intelligent platform. We're finishing the final checks before go-live.</p>
+
+  <div class="status">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="txt" id="statusText">Connecting your records…</span>
+  </div>
+
+  <form id="notifyForm">
+    <input type="email" id="emailInput" placeholder="you@email.com" required aria-label="Email address">
+    <button type="submit" id="notifyBtn">Notify me</button>
+  </form>
+  <p class="note" id="formNote">We'll only email you when MediUnify launches.</p>
+</main>
+
+<footer>
+  © 2026 MediUnify. <strong>Powered by Novus Health Labs.</strong>
+</footer>
+
+<script>
+  const statuses = [
+    "Connecting your records…",
+    "Linking your doctors…",
+    "Syncing your pharmacy…",
+    "Securing your data…",
+    "Almost ready…"
+  ];
+  let i = 0;
+  const statusEl = document.getElementById('statusText');
+  statusEl.style.transition = 'opacity .25s ease';
+  setInterval(() => {
+    i = (i + 1) % statuses.length;
+    statusEl.style.opacity = 0;
+    setTimeout(() => {
+      statusEl.textContent = statuses[i];
+      statusEl.style.opacity = 1;
+    }, 250);
+  }, 2600);
+
+  const form = document.getElementById('notifyForm');
+  const note = document.getElementById('formNote');
+  const btn = document.getElementById('notifyBtn');
+  const input = document.getElementById('emailInput');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = input.value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){
+      note.textContent = "Please enter a valid email address.";
+      note.classList.remove('success');
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = "Adding…";
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwLuZd3WWNBVds6-B7y4cPje0DVyoQRWDwSglqbks25oU4sO_FYp3XoXsjsJM_gUuuqHA/exec';
+    
+    fetch(scriptURL, {
+      method: 'POST',
+      body: new URLSearchParams({ 'email': email })
+    })
+    .then(response => {
+      btn.textContent = "You're on the list";
+      note.textContent = "Thanks — we'll let you know the moment we launch.";
+      note.classList.add('success');
+      input.value = "";
+      input.disabled = true;
+    })
+    .catch(error => {
+      btn.disabled = false;
+      btn.textContent = "Notify me";
+      note.textContent = "Oops! Something went wrong. Please try again.";
+      note.classList.remove('success');
+    });
+  });
+</script>
+
+</body>
+</html>
